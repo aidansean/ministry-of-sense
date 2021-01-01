@@ -1,0 +1,387 @@
+canvas{
+  border : 0px solid black ;
+  margin : 0px ;
+}
+div#div_gameWrapper{
+  width : 750px ;
+  height : 1006px ;
+  overflow : hidden ;
+  border : 9px solid #001100 ;
+  margin : auto ;
+  margin-top : 20px ;
+  background : #ffffff ;
+}
+
+div#div_teamname{
+  font : 25pt bold arial , sans-serif ;
+  padding-top : 0.33em ;
+  background : #001100 ;
+  width : 150px ;
+  color : white ;
+  text-align : center ;
+  line-height : 1.2em ;
+}
+div#div_header{
+  width : 600px ;
+  border : 1px solid #001100 ;
+}
+
+img#img_header, img#img_footer{
+  display : block ;
+}
+
+div.tab{ display : table ; }
+div.tab_row { display : table-row ; width : 100% ; }
+div.tab_cell{ display : table-cell ; vertical-align : top ; }
+
+table#table_decisions{
+  width : 100% ;
+}
+th.decision, td.decision{
+  text-align : center ;
+  font : 12pt arial , sans-serif ;
+}
+
+table#table_events_summary{
+  width : 90% ;
+  background : white ;
+}
+th.events_summary, td.events_summary{
+  font : 12pt arial ;
+}
+
+div#div_footer{
+  color : #001100 ;
+  font : 24pt arial ;
+  text-align : center ;
+  width : 750px ;
+  vertical-align : middle ;
+}
+
+div#div_hidden{
+  display : none ;
+}
+div#div_topology{
+  height : 110px ;
+  vertical-align : middle ;
+  line-height : 1.25em ;
+  color : black ;
+  background : rgba(255,255,255,0.75) ;
+  padding-top : 0px ;
+  margin-top : 0px ;
+}
+
+div#div_playSpace{
+  padding : 0px ;
+  height : 750px ;
+  overflow : hidden ;
+}
+
+button.play{
+  width : 150px ;
+  height : 75px ;
+  font : 24pt arial , sans-serif ;
+  margin : 20px ;
+}
+h2.play{
+  font : 24pt arial black , sans-serif ;
+  padding-left : 0.25em ;
+  margin : 0px ;
+}
+p.play{
+  font : 14pt georgia , serif ;
+  font-style : italic ;
+  padding : 0.0em ;
+  padding-left : 1.25em ;
+  margin : 0px ;
+}
+tr.odd{
+  background : #eeeeee ;
+}
+tr.even{
+  background : #dddddd ;
+}
+th.play_image{
+  height : 120px ;
+  padding : 0px ;
+}
+img.play{
+  margin : 0px ;
+  padding : 10px ;
+  border-radius : 25px ;
+}
+table#table_play{
+  border-collapse : collapse ;
+}
+input#input_name{
+  font : 24pt arial ;
+}
+
+
+
+
+
+h2#h2_team_ATLAS, h2#h2_team_CMS{
+  font : 36pt arial ;
+  color : white ;
+  text-align : center ;
+  background : black ;
+  padding : 10px ;
+  margin : 0px ;
+  width : 330px ;
+}
+canvas#canvas_ATLAS, canvas#canvas_CMS{
+  border : 1px solid black ;
+}
+
+div#div_spy_tab{
+  width : 50% ;
+  margin : auto ;
+}
+div.spy_tab_cell{
+  padding : 12px ;
+}
+
+button#button_analyse_ATLAS, button#button_analyse_CMS{
+  width : 350px ;
+  height : 100px ;
+  font : 30pt arial ;
+  color : white ;
+  background : black ;
+}
+
+button#button_freeze, button#button_combine{
+  width : 600px ;
+  height : 100px ;
+  font : 30pt arial ;
+  color : black ;
+  background : white ;
+}
+button#button_combine{
+}
+div.center{
+  text-align : center ;
+  width : 100% ;
+}
+th#th_ATLAS_nSigma, th#th_CMS_nSigma{
+  color : white ;
+  text-align : center ;
+  font : 30pt arial ;
+  width : 720px ;
+}
+table#table_combo{
+  display : none ;
+  width : 720px ;
+  margin : auto ;
+  border : 0px solid black ;
+}
+th#th_final_result{
+  font : 60pt arial ;
+  text-align : center ;
+}
+th.combo{
+  font : 30pt arial ;
+  padding : 0.25em ;
+}
+th.combo_left{
+  text-align : right ;
+  width : 150px ;
+  padding-right : 1em ;
+}
+th.combo_right{
+  text-align : left ;
+  width : 550px ;
+}
+
+
+
+div#div_eventDisplay{
+  width : 750px ;
+  height : 750px ;
+}
+
+
+h2.game_over{
+  font-size : 70px ;
+  margin-top : 10px ;
+}
+div.game_over{
+  color : rgb(0,0,0) ;
+  padding : 0.5em ;
+  font-family : arial , sans-serif ;
+  text-align : center ;
+  width : 500px ;
+  margin : auto ;
+  margin-top : 50px ;
+  background : rgba(255,255,255,0.7) ;
+  border : 1px solid black ;
+}
+p.game_over{
+  font-size : 18pt ;
+}
+p.game_over_score{
+  font-size : 32pt ;
+}
+button.game_over, p.submit_score{
+  font-size : 36pt ;
+  width : 90% ;
+}
+p.submit_score{
+  padding : 4px ;
+  margin : auto ;
+  text-align : center ;
+}
+
+table#table_scores_suddenDeath, table#table_scores_pro{
+  width : 90% ;
+  margin : auto ;
+}
+button.scores{
+  font-size : 24pt ;
+}
+div#div_button_wrapper{
+  font : 36pt arial ;
+  padding : 0.0em ;
+  text-align : center ;
+  border : 0px solid red ;
+  margin-bottom : 1em ;
+}
+th.highscores{
+  font : 24pt arial , sans-serif ;
+  text-align : center ;
+  padding : 0.25em ;
+  color : #ffffff ;
+  background : #000000 ;
+}
+td.highscores{
+  font : 16pt arial , sans-serif ;
+  text-align : center ;
+  padding : 0.25em ;
+}
+h2.scores{
+  text-align : center ;
+  width : 88% ;
+  margin : auto ;
+  background : black ;
+  color : white ;
+}
+
+
+
+h2{
+  font : 30pt arial , sans-serif ;
+  padding : 0px ;
+  padding-top : 0.25em ;
+  padding-left: 0.25em ;
+  margin : 0px ;
+}
+p.blurb{
+  font : 13pt georgia , serif ;
+  padding : 1em ;
+  margin-top : 0px ;
+  line-height : 1.5em ;
+}
+
+
+/* Taken from http://css.maxdesign.com.au/listamatic/horizontal03.htm */
+#navcontainer{
+  clear : both ;
+  height : 46px ;
+  background-color: #000000 ;
+  width : 100% ;
+  border-top : 0px solid white ;
+}
+#navcontainer ul{
+  padding-left: 0 ;
+  margin : 0px ;
+  margin-left: 0 ;
+  background-color: #000000 ;
+  color: White ;
+  float: left ;
+  width: 100% ;
+  font-family: arial, helvetica, sans-serif ;
+  font-size : 22pt ;
+}
+#navcontainer ul li { display : inline ; }
+#navcontainer ul li a{
+  padding: 0.2em 1em ;
+  background-color: #000000 ;
+  color: White ;
+  text-decoration: none ;
+  float: left ;
+  border-right : 1px solid #ffffff ;
+}
+#navcontainer ul li a:hover{
+  background-color: #ffffff ;
+  color: #000000 ;
+}
+#currentNavButton{
+  background-color: #ffffff ;
+}
+
+input#input_message_name, input#input_message_email{
+  font : 16pt arial ;
+}
+textarea#textarea_message{
+  font-size : 16pt ;
+}
+button.button_about{
+  font : 16pt arial ;
+}
+td.message_left, td.message_right{
+  font : 16pt arial ;
+  padding : 0.25em ;
+}
+td.message_left{
+  text-align : right ;
+  padding-right : 1em ;
+  width : 150px ;
+}
+td.message_right{
+  text-align : left ;
+  width : 400px ;
+}
+
+
+
+
+table#table_music_player{
+  float : right ;
+  background : black ;
+  color : white ;
+  width : 100px ;
+}
+button.music_player{
+  width : 25px ;
+  height : 25px ;
+  font : 15pt arial , sans-serif ;
+}
+th.music{
+  font : 10pt arial , sans-serif ;
+}
+td.music_song{
+  font : 10pt arial , sans-serif ;
+}
+td.music_button{
+  width : 25% ;
+  text-align : center ;
+}
+td#td_sounds{
+  vertical-align : middle ;
+  font-size : 12pt ;
+  padding-bottom : 6px ;
+  padding-left : 0.25em ;
+}
+canvas#canvas_music_sound_on, canvas#canvas_music_sound_off{
+  display : inline ;
+}
+
+
+
+img#img_GSAL{
+  border : 1px solid black ;
+  padding : 2px ;
+}
+p.center{
+  text-align : center ;
+}

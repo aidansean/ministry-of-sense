@@ -1,0 +1,319 @@
+<html>
+<head>
+<title>Logo maker</title>
+<script type="text/javascript" src="js/logo.php"></script>
+<script type="text/javascript">
+var canvas_generic    = null ;
+var canvas_trigger    = null ;
+var canvas_maths      = null ;
+var canvas_chemistry  = null ;
+var context_generic   = null ;
+var context_trigger   = null ;
+var context_maths     = null ;
+var context_chemsitry = null ;
+
+var detector = null ;
+var scale = 5.0 ;
+var cwLogo = scale*600 ;
+var chLogo = scale*340 ;
+
+function start(){
+  SR = 400 ;
+  cw = 2*SR ;
+  ch = 2*SR ;
+  
+  canvas_generic   = Get('canvas_generic_logo'  ) ;
+  canvas_trigger   = Get('canvas_trigger_logo'  ) ;
+  canvas_maths     = Get('canvas_maths_logo'    ) ;
+  canvas_chemistry = Get('canvas_chemistry_logo') ;
+  var canvae = [canvas_generic,canvas_trigger,canvas_maths,canvas_chemistry] ;
+  for(var i=0 ; i<canvae.length ; i++){
+    canvae[i].width  = cwLogo ;
+    canvae[i].height = chLogo ;
+    draw_MS(canvae[i].getContext('2d')) ;
+  }
+  context_generic   = canvas_generic  .getContext('2d') ;
+  context_trigger   = canvas_trigger  .getContext('2d') ;
+  context_maths     = canvas_maths    .getContext('2d') ;
+  context_chemistry = canvas_chemistry.getContext('2d') ;
+  
+  var x2 = 0.60*cwLogo ;
+  var y2 = 0.37*chLogo ;
+  
+  draw_generic_doodle  (context_generic  , x2, y2, chLogo) ;
+  draw_trigger_doodle  (context_trigger  , x2, y2, chLogo) ;
+  draw_maths_doodle    (context_maths    , x2, y2, chLogo) ;
+  draw_chemistry_doodle(context_chemistry, x2, y2, chLogo) ;
+}
+
+function draw_MS(context){
+  var c = context ;
+  
+  c.save() ;
+  c.fillStyle = 'rgb(200,200,200)' ;
+  c.fillStyle = 'rgb(255,255,255)' ;
+  c.fillRect(0,0,cwLogo,chLogo) ;
+  c.restore() ;
+  
+  c.save() ;
+  c.translate(0.5,0.5) ;
+  
+  var font_family = 'Calibri, Calisto MT, sans-serif' ;
+  //font_family = 'times' ;
+  c.font = 0.5*cwLogo + 'px ' + font_family ;
+  c.textAlign = 'center' ;
+  c.textBaseline = 'middle' ;
+  c.fillStyle = 'rgb(0,0,0)' ;
+  c.fillStyle = 'rgb(255,255,255)' ;
+  c.strokeStyle = 'rgb(0,0,0)' ;
+  c.lineWidth = 0.005*ch ;
+  
+  var x1 = 0.025*cwLogo ;
+  var y1 = 0.40 *chLogo ;
+  var x2 = 0.60 *cwLogo ;
+  var y2 = 0.37 *chLogo ;
+  var x3 = 0.975*cwLogo ;
+  var y3 = y1 ;
+  
+  c.save() ;
+  c.shadowBlur = 0.025*cwLogo ;
+  //c.shadowColor = 'black' ;
+  
+  c.fillStyle = 'rgb(236,103, 29)' ;
+  c.shadowOffsetX =  0.03*cwLogo ;
+  c.shadowOffsetY =  0.03*cwLogo ;
+  c.textAlign = 'left' ;
+  c.fillText  ('M', x1, y1) ;
+  
+  c.fillStyle = 'rgb(255,255,255)' ;
+  c.shadowOffsetX =  0.00*cwLogo ;
+  c.shadowOffsetY =  0.04*cwLogo ;
+  //c.fillText  ('o', x2, y2) ;
+  
+  c.fillStyle = 'rgb( 17,133,193)' ;
+  c.shadowOffsetX = -0.03*cwLogo ;
+  c.shadowOffsetY =  0.03*cwLogo ;
+  c.textAlign = 'right' ;
+  c.fillText  ('S', x3, y1) ;
+  
+  c.font = 0.5*cwLogo + 'px ' + font_family ;
+  c.textAlign = 'left' ;
+  c.strokeText('M', x1, y1) ;
+  //c.strokeText('o', x2, y2) ;
+  c.textAlign = 'right' ;
+  c.strokeText('S', x3, y1) ;
+  
+  c.beginPath() ;
+  c.restore() ;
+  
+  var y4 =0.86*chLogo ;
+  c.fillStyle = 'rgb(0,0,0)' ;
+  c.font = 0.13*cwLogo + 'px ' + font_family ;
+  c.fillText('Ministry of Sense', 0.5*cwLogo, y4) ;
+  
+  c.save() ;
+  c.shadowBlur = 0.0 ;
+  c.lineWidth = 0.01*chLogo ;
+  c.lineCap = 'round' ;
+  var dx1 = 0.036*cwLogo ;
+  var dx2 = 0.026*cwLogo ;
+  var xA  = 0.448*cwLogo ;
+  var yA  = y4-0.122*chLogo ;
+  var yB  = y4+0.092*chLogo ;
+  
+  c.moveTo(   dx1, yA) ;
+  c.lineTo(cwLogo-dx1, yA) ;
+  c.moveTo(   dx1, yB) ;
+  c.lineTo(xA-dx2, yB) ;
+  c.moveTo(xA+dx2, yB) ;
+  c.lineTo(cwLogo-dx1, yB) ;
+  c.stroke() ;
+  c.restore() ;
+  
+  c.restore() ;
+}
+
+function draw_generic_doodle(context, x2, y2, ch){
+  var c = context ;
+  c.save() ;
+  c.lineWidth = 0.01*ch ;
+  c.fillStyle = 'rgb(150,150,150)' ;
+  c.strokeStyle = 'rgb(0,0,0)' ;
+  c.beginPath() ;
+  c.arc(x2, y2, 0.24*ch, 0, 2*Math.PI, true) ;
+  c.closePath() ;
+  c.fill() ;
+  c.stroke() ;
+  
+  c.fillStyle = 'rgb(255,255,255)' ;
+  c.beginPath() ;
+  c.arc(x2, y2, 0.20*ch, 0, 2*Math.PI, true) ;
+  c.closePath() ;
+  c.fill() ;
+  c.stroke() ;
+  c.restore() ;
+}
+function draw_maths_doodle(context, x2, y2, ch){
+  var c = context ;
+  c.save() ;
+  c.translate(x2,y2) ;
+  var theta = -2*Math.PI/6 ;
+  var r = 0.2*ch ;
+  
+  var color = 'rgb(180,180,255)' ;
+  c.strokeStyle = color ;
+  c.beginPath() ;
+  var n = 3 ;
+  var g = 0.4*r ;
+  for(var i=-n ; i<=n ; i++){
+    var a  =  i*g ;
+    var b1 = -(n+0.5)*g ;
+    var b2 =  (n+0.5)*g ;
+    c.moveTo(a, b1) ;
+    c.lineTo(a, b2) ;
+    c.moveTo(b1, a) ;
+    c.lineTo(b2, a) ;
+  }
+  c.stroke() ;
+  
+  color = 'rgb(100,100,100)' ;
+  c.strokeStyle = color ;
+  c.fillStyle   = color ;
+  
+  c.beginPath() ;
+  c.moveTo(0.0*r, 0.0*r) ;
+  c.lineTo(1.0*r, 0.0*r) ;
+  c.stroke() ;
+  
+  c.rotate(theta) ;
+  
+  c.beginPath() ;
+  c.moveTo(0,0) ;
+  c.lineTo(r,0) ;
+  c.stroke() ;
+  
+  c.beginPath() ;
+  c.moveTo(0.0*r, 0.0*r) ;
+  c.lineTo(0.2*r,-0.1*r) ;
+  c.lineTo(0.2*r, 0.1*r) ;
+  c.lineTo(0.0*r, 0.0*r) ;
+  c.moveTo(1.0*r, 0.0*r) ;
+  c.lineTo(0.8*r,-0.1*r) ;
+  c.lineTo(0.8*r, 0.1*r) ;
+  c.lineTo(1.0*r, 0.0*r) ;
+  c.fill() ;
+  c.font = 'italic ' + (0.5*r) + 'px times , serif' ;
+  c.textAlign = 'center' ;
+  c.fillText('r', 0.5*r, -0.18*r) ;
+  
+  c.strokeStyle = 'rgb(0,0,0)' ;
+  c.lineWidth = 0.01*ch ;
+  var nDash = 30 ;
+  var dTheta = 2*Math.PI/nDash ;
+  for(var i=0 ; i<nDash ; i+=2){
+    c.beginPath() ;
+    c.arc(0, 0, r, i*dTheta, (i+1)*dTheta, false) ;
+    c.stroke() ;
+  }
+  c.restore() ;
+}
+function draw_trigger_doodle(context, x2, y2, chLogo){
+  detector = new detector_object() ;
+  make_logo_detector() ;
+  
+  // This is CPU intensive, so do it last
+  detector.make_cells() ;
+  for(var i=0 ; i<detector.segments.length ; i++){
+    detector.segments[i].activate_cells() ;
+  }
+  
+  make_eventDisplay_base() ;
+  var coll = new collision_object() ;
+  coll.PNG.seed = 576267119 ;
+  coll.add_tracks(20) ;
+  //Get('div_debug').innerHTML = coll.PNG.seed ;
+  coll.topology = ['muon','muon','electron','electron'] ;
+  coll.make_particles() ;
+  coll.main_particles[0].phi = 0.2*pi ;
+  
+  var canvas_detector = Get('canvas_eventDisplay_hidden') ;
+  canvas_detector.width  = cw ;
+  canvas_detector.height = ch ;
+  var context_detector = canvas_detector.getContext('2d') ;
+  detector.draw(context_detector) ;
+  coll.draw_tracks(context_detector, 100) ;
+  coll.draw_main_particles(context_detector, 100) ;
+  coll.draw_interaction_point(context_detector) ;
+
+  var c = context ;
+  c.save() ;
+  var r = 0.25*chLogo ;
+  c.drawImage(Get('canvas_eventDisplay_hidden'), 0, 0, cw, ch, x2-r, y2-r, 2*r, 2*r) ;
+  c.restore() ;
+}
+function draw_chemistry_doodle(context, x2, y2, ch){
+  y2 += +0.05*ch ;
+  var r = 0.2*ch ;
+  var c = context ;
+  c.save() ;
+  c.translate(x2,y2) ;
+  c.lineWidth = 0.01*ch ;
+  c.fillStyle = 'rgb(150,200,150)' ;
+  c.strokeStyle = 'rgb(0,0,0)' ;
+  c.beginPath() ;
+  var dtheta = 0.35*pi ;
+  var dx = r*Math.sin(dtheta) ;
+  var dy = r*Math.cos(dtheta) ;
+  c.arc(0, 0, r, -0.5*pi+dtheta, -0.5*pi-dtheta, false) ;
+  c.closePath() ;
+  c.fill() ;
+  
+  c.strokeStyle = 'rgb(150,200,150)' ;
+  c.beginPath() ;
+  c.moveTo(-dx, -dy) ;
+  c.lineTo( dx, -dy) ;
+  c.stroke() ;
+  
+  c.strokeStyle = 'rgb(0,0,0)' ;
+  c.beginPath() ;
+  dtheta = 0.1*pi ;
+  dx = r*Math.sin(dtheta) ;
+  dy = r*Math.cos(dtheta) ;
+  c.moveTo(dx,-dy-0.15*ch) ;
+  c.arc(0, 0, r, -0.5*pi+dtheta, -0.5*pi-dtheta, false) ;
+  c.lineTo(0-dx,0-dy-0.15*ch) ;
+  c.stroke() ;
+  
+  c.strokeStyle = 'rgb(150,255,150)' ;
+  c.beginPath() ; c.arc(-0.3*r, 0.2 *r, 0.1*r, 0, 2*pi, true) ; c.stroke() ;
+  c.beginPath() ; c.arc( 0.4*r,-0.1 *r, 0.1*r, 0, 2*pi, true) ; c.stroke() ;
+  c.beginPath() ; c.arc(-0.2*r,-0.25*r, 0.1*r, 0, 2*pi, true) ; c.stroke() ;
+  c.beginPath() ; c.arc( 0.2*r, 0.45*r, 0.1*r, 0, 2*pi, true) ; c.stroke() ;
+  
+  c.restore() ;
+}
+
+function Get(id){ return document.getElementById(id) ; }
+</script>
+<style type="text/css">
+canvas{
+  border : 0px solid black ;
+  margin : 20px ;
+}
+body{
+  background : #dddddd ;
+}
+canvas#canvas_eventDisplay_hidden{
+  display : none ;
+}
+</style>
+</head>
+<body onload="start()">
+<canvas id="canvas_generic_logo"  ></canvas><br />
+<canvas id="canvas_trigger_logo"  ></canvas><br />
+<canvas id="canvas_maths_logo"    ></canvas><br />
+<canvas id="canvas_chemistry_logo"></canvas><br />
+<canvas id="canvas_eventDisplay_hidden"></canvas>
+<div id="div_debug"></div>
+</body>
+</html>

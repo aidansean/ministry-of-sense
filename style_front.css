@@ -1,0 +1,16 @@
+div#div_front{
+  background-color : white ;
+  width : 60% ;
+  margin : auto ;
+  padding : 1em ;
+  text-align : center ;
+  font-family : 'Slabo 27px', serif ;
+  border-radius : 1em ;
+  margin-bottom : 3em ;
+}
+div#div_front p{
+  font-family : inherit ;
+}
+div#div_front p img{
+  border-radius : 1em ;
+}

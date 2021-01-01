@@ -1,0 +1,536 @@
+<html>
+<head>
+<title>Histogrammer</title>
+<style type="text/css">
+body{
+  background : #dddddd ;
+  background-position : cover ;
+  background-image : url(chariots.jpg) ;
+}
+button#button_next{
+  font : 60pt arial , sans-serif ;
+  width : 600px ;
+}
+div#div_wrapper{
+  width : 600px ;
+  margin : auto ;
+}
+</style>
+<script type="text/javascript">
+var question_text = 'How would you rate your fitness?' ;
+var responses = [] ;
+responses.push([1,'Awful'    ]) ;
+responses.push([2,'Poor'     ]) ;
+responses.push([3,'Average'  ]) ;
+responses.push([4,'Good'     ]) ;
+responses.push([5,'Excellent']) ;
+
+var results_audience = [] ;
+results_audience.push([1,20]) ;
+results_audience.push([2,10]) ;
+results_audience.push([3,10]) ;
+results_audience.push([4,40]) ;
+results_audience.push([5,80]) ;
+
+var results_average = [] ;
+results_average.push([1,10]) ;
+results_average.push([2,20]) ;
+results_average.push([3,40]) ;
+results_average.push([4,20]) ;
+results_average.push([5,10]) ;
+
+var results_topgear = [] ;
+results_topgear.push([1,80]) ;
+results_topgear.push([2,60]) ;
+results_topgear.push([3,40]) ;
+results_topgear.push([4,20]) ;
+results_topgear.push([5,10]) ;
+
+var results_midlife = [] ;
+results_midlife.push([1,80]) ;
+results_midlife.push([2,60]) ;
+results_midlife.push([3,40]) ;
+results_midlife.push([4,20]) ;
+results_midlife.push([5,10]) ;
+
+function GetXmlHttpObject(){
+  if(window.XMLHttpRequest){
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+    return new XMLHttpRequest() ;
+  }
+  if(window.ActiveXObject){
+    // code for IE6, IE5
+    return new ActiveXObject("Microsoft.XMLHTTP") ;
+  }
+  return null ;
+}
+var ajax = new GetXmlHttpObject() ;
+
+function get_audience_from_server(){
+  var uri = 'read.php?q=fitness' ;
+  ajax.open('GET', uri, true) ;
+  ajax.onreadystatechange = update_audience ;
+  ajax.send(null) ;
+}
+
+function update_audience(){
+  if(ajax.readyState!=4) return ;
+  var results = ajax.responseText.split(',') ;
+  var n = 0 ;
+  for(var i=0 ; i<results.length ; i++){
+    results[i] = parseInt(results[i]) ;
+    n += results[i] ;
+  }
+  if(n<60) return ;
+  results_audience = [] ;
+  for(var i=0 ; i<results.length ; i++){
+    results_audience.push([i+1,results[i]]) ;
+  }
+}
+
+var histogram = null ;
+var canvas = null ;
+
+function start(){
+  get_audience_from_server() ;
+  
+  canvas = Get('canvas_histogram') ;
+  Get('button_next').addEventListener('click', next_series) ;
+  
+  var context = canvas.getContext('2d') ;
+  var pattern_average = context.createPattern(Get('img_stripe_red' ),'repeat') ;
+  var pattern_topgear = context.createPattern(Get('img_stripe_blue'),'repeat') ;
+  
+  var series_audience = new data_series('This|audience'   , 'rgb(0,200,0)' , results_audience) ;
+  var series_average  = new data_series('General|public'  , pattern_average, results_average ) ;
+  var series_topgear  = new data_series('Top Gear|Viewers', pattern_topgear, results_topgear ) ;
+  var series_midlife  = new data_series('Mid-life|Crisis' , pattern_topgear, results_midlife ) ;
+  
+  series_audience.normalise() ;
+  series_average .normalise() ;
+  series_topgear .normalise() ;
+  series_midlife .normalise() ;
+    
+  histogram = new histogram_object(canvas) ;
+  histogram.question = question_text ;
+  histogram.add_series(series_average ) ;
+  histogram.add_series(series_audience) ;
+  //histogram.add_series(series_topgear ) ;
+  histogram.add_series(series_midlife ) ;
+  
+  histogram.draw() ;
+}
+
+function next_series(){
+  histogram.series_counter++ ;
+  animate_histogram() ;
+}
+
+// This is a class for handling a histogram of values (or any variable of interest) and
+// then animating it to show the results.  Its psychologically important to see it animate
+// before the player's/audiences eyes!
+
+var delay_animate_histogram = 25 ;
+var value_min = -0.5 ;
+var value_max =  5.5 ;
+var histogram_nBins = 6 ;
+var histogram_xAxisLAbelFrequency = 1 ;
+
+function data_series(name, fill, data){
+  this.name = name ;
+  this.fill = fill ;
+  this.data = data ;
+  
+  this.max_height = -1 ;
+  for(var i=0 ; i<this.data.length ; i++){ this.max_height = Math.max(this.max_height,this.data[i][1]) ; }
+  
+  this.data_counter = 0 ;
+  this.bin_counter = 0 ;
+  
+  this.reset = function(){
+    this.data_tmp = [] ;
+    for(var i=0 ; i<this.data.length ; i++){
+      this.data_tmp.push(0) ;
+    }
+  }
+  this.reset() ;
+  
+  this.normalise = function(){
+    var total = 0 ;
+    for(var i=0 ; i<this.data.length ; i++){ total += this.data[i][1] ; }
+    for(var i=0 ; i<this.data.length ; i++){ this.data[i][1] *= 100/total ; }
+    this.max_height = -1 ;
+    for(var i=0 ; i<this.data.length ; i++){ this.max_height = Math.max(this.max_height,this.data[i][1]) ; }
+  }
+  this.increment = function(){
+    if(this.data_tmp[this.bin_counter]>=this.data[this.bin_counter][1]){
+      this.bin_counter++ ;
+    }
+    if(this.bin_counter==this.data.length) return false ;
+    this.data_tmp[this.bin_counter]++ ;
+    return true ;
+  }
+  
+}
+
+function histogram_object(canvas){
+  this.nBins = histogram_nBins ;
+  this.bins = [] ;
+  this.binsInOrder_array = [] ;
+  for(var i=0 ; i<this.nBins ; i++){
+    this.bins.push(0) ;
+    this.binsInOrder_array.push(0) ;
+  }
+  this.drawStyle = 'rect' ;
+  this.value_min = value_min ;
+  this.value_max = value_max ;
+  
+  this.canvas = canvas ;
+  this.context = this.canvas.getContext('2d') ;
+  
+  // Used for the animation.
+  this.binsInOrder = [] ;
+  this.binsInOrder_index = 0 ;
+  
+  // The colour of the histogram should match the experiment.
+  this.color = 'black' ;
+  
+  this.series = []  ;
+  this.add_series = function(series){
+    series.index = this.series.length ;
+    this.series.push(series) ;
+  }
+  
+  this.normalise = function(){
+    var total = this.nEntries() ;
+    for(var i=0 ; i<this.bins.length ; i++){
+      this.bins[i] *= 100/total ;
+    }
+    for(var i=0 ; i<this.binsInOrder.length ; i++){
+      this.binsInOrder[i] *= 100/total ;
+    }
+  }
+  this.add_value = function(value){
+    // This adds a value to the histograms.  The lookup function is quite cheap.
+    if(value<this.value_min) return ;
+    if(value>this.value_max) return ;
+    var index = Math.floor((this.nBins+0)*(value-this.value_min)/(this.value_max-this.value_min)) ;
+    this.bins[index]++ ;
+    this.binsInOrder.push(index) ;
+  }
+  this.max_height = function(){
+    // Find the heigh of the highest bin so we can dynamically change the y-axis etc.
+    var result = 0 ;
+    for(var i=0 ; i<this.series.length ; i++){
+      if(this.series[i].max_height>result) result = this.series[i].max_height ;
+    }
+    return result ;
+  }
+  this.nEntries = function(){
+    // Sum up all the events stored.  It might be cheaper to increment a counter as we
+    // fill the histogram.
+    var total = 0 ;
+    for(var i=0 ; i<this.bins.length ; i++){
+      total += this.bins[i] ;
+    }
+    return total ;
+  }
+  
+  this.settings = [] ;
+  this.update_settings = function(){
+    // Margin around the histogram, in relative units (ie 15%.)
+    this.settings.mt = 0.25 ;
+    this.settings.ml = 0.15 ;
+    this.settings.mb = 0.25 ;
+    this.settings.mr = 0.05 ;
+    this.settings.w = canvas.width  ;
+    this.settings.h = canvas.height ;
+    
+    // Plot width and height.
+    this.settings.pw = this.settings.w*(1-this.settings.ml-this.settings.mr) ;
+    this.settings.ph = this.settings.h*(1-this.settings.mt-this.settings.mb) ;
+    
+    // Maximum height, which must take the error bars into account.
+    this.settings.mh = this.max_height()+2*sqrt(this.max_height()) ;
+    
+    // Set colours etc.
+    this.context.fillStyle = this.color ;
+    this.context.strokeStyle = this.color ;
+    this.context.textAlign = 'center' ;
+    this.context.font = '20px arial' ;
+  }
+  
+  this.draw_background = function(){
+    var c = this.context ;
+    c.save() ;
+    
+    // Clear the plotting area.
+    c.fillStyle = 'white' ;
+    c.fillRect(0,0,this.settings.w,this.settings.h) ;
+    
+    c.restore() ;
+  }
+  this.draw_border = function(){
+    var c = this.context ;
+    c.save() ;
+    
+    // Draw a nice border around the plot area.
+    c.strokeStyle = this.color ;
+    c.strokeRect(this.settings.w*this.settings.ml,this.settings.h*this.settings.mt,this.settings.pw,this.settings.ph) ;
+    
+    c.restore() ;
+  }
+  this.draw_xaxis_ticks = function(theBins){
+    var c = this.context ;
+    c.save() ;
+    
+    var bin_width = this.settings.pw/(theBins.length) ;
+    for(var i=0 ; i<=theBins.length ; i++){
+      // First get the value of the value for the labels.
+      var value = Math.floor(this.value_min + i*(this.value_max-this.value_min)/(theBins.length)) ;
+      
+      // Dimensions hardcoded?  What was I thinking?
+      var x = this.settings.w*this.settings.ml + (i+0.0)*bin_width ;
+      var y = this.settings.h - 0.5*this.settings.mb*this.settings.h ;
+      var tickLength = 0.1*this.settings.mt*this.settings.h ;
+      
+      // Draw the tick mark.
+      c.beginPath() ;
+      c.moveTo(x, this.settings.h-1*this.settings.mb*this.settings.h-tickLength) ;
+      c.lineTo(x, this.settings.h-1*this.settings.mb*this.settings.h+tickLength) ;
+      c.stroke() ;
+      c.closePath() ;
+    }
+    
+    c.restore() ;
+  }
+  this.draw_xaxis_labels = function(theBins){
+    var c = this.context ;
+    c.save() ;
+    
+    var bin_width = this.settings.pw/(theBins.length) ;
+    for(var i=0 ; i<theBins.length ; i++){
+      var x = this.settings.w*this.settings.ml + (i+0.5)*bin_width ;
+      var y = this.settings.h - 0.9*this.settings.mb*this.settings.h ;
+      var tickLength = 0.1*this.settings.mt*this.settings.h ;
+      if(i%histogram_xAxisLAbelFrequency==0){
+        // Now add a tick with a label.
+        c.fillStyle = 'black' ;
+        text = responses[i][1] ;
+        c.textAlign = 'left' ;
+        c.textBaseline = 'middle' ;
+        c.translate(x,y) ;
+        c.rotate(0.5*Math.PI) ;
+        c.fillText(text, 0, 0) ;
+        c.rotate(-0.5*Math.PI) ;
+        c.translate(-x,-y) ;
+      }
+    }
+    
+    c.restore() ;
+  }
+  this.draw_yaxis_ticks = function(){
+    var c = this.context ;
+    c.save() ;
+    
+    // Now the y-axis.  The tick intervals should be handled more gracefully than this.
+    c.fillStyle = 'black' ;
+    c.textBaseline = 'middle' ;
+    c.textAlign = 'right' ;
+    c.beginPath() ;
+    var di = 1 ;
+    if(this.settings.mh>=10  ) di =   2 ;
+    if(this.settings.mh>=20  ) di =  10 ;
+    if(this.settings.mh>=100 ) di =  10 ;
+    if(this.settings.mh>=200 ) di =  25 ;
+    if(this.settings.mh>=1000) di = 100 ;
+    if(this.settings.mh>=2000) di = 250 ;
+    for(var i=0 ; i<=this.settings.mh ; i+=di){
+      var x = this.settings.ml*this.settings.w ;
+      var y = this.settings.h-this.settings.h*this.settings.mb-this.settings.ph*i/(1+this.settings.mh) ;
+      c.moveTo(x-5,y) ;
+      c.lineTo(x+5,y) ;
+      c.fillText(i,0.85*this.settings.ml*this.settings.w,y) ;
+    }
+    c.stroke() ;
+    
+    c.restore() ;
+  }
+  this.draw_axis_titles = function(){
+    var c = this.context ;
+    c.save() ;
+    
+    c.font = 0.4*this.settings.ml*this.settings.w + 'px arial , sans-serif' ;
+    
+    // Draw the axis titles.  A bit messy, but works.
+    c.textAlign = 'right' ;
+    var x_xAxisTitle = this.settings.w*(1-this.settings.ml) ;
+    var y_xAxisTitle = this.settings.h - 0.1*this.settings.mt*this.settings.h ;
+    c.fillText('Rating', x_xAxisTitle, y_xAxisTitle) ;
+    
+    c.textAlign = 'right' ;
+    var x_yAxisTitle = this.settings.w*this.settings.ml*0.4 ;
+    var y_yAxisTitle = this.settings.h*this.settings.mt ;
+    c.translate(x_yAxisTitle,y_yAxisTitle) ;
+    c.rotate(-0.5*Math.PI) ;
+    c.fillText('People (%)',0,0) ;
+    c.rotate( 0.5*Math.PI) ;
+    c.translate(-x_yAxisTitle,-y_yAxisTitle) ;
+    
+    c.restore() ;
+  }
+  this.draw_data = function(series){
+    var theBins = series.data_tmp ;
+    
+    var c = this.context ;
+    c.save() ;
+    
+    var bin_width = this.settings.pw/(theBins.length) ;
+    for(var i=0 ; i<=theBins.length ; i++){
+      var x = this.settings.w*this.settings.ml + (i+0.0)*bin_width ;
+      var y = this.settings.h - 0.5*this.settings.mb*this.settings.h ;
+      
+      // Check for an empty bin.  (Things can get tricky if you try to draw error bars on
+      // a zero bin.)
+      if(theBins[i]==0) continue ;
+      
+      // Draw the bin, depending on the style.
+      c.fillStyle = series.fill ;
+      if(this.drawStyle=='rect'){
+        // Barchart.
+        var f = 1.0/(this.series.length+1) ;
+        var x1 = this.settings.w*this.settings.ml + (i+0.5*f+series.index*f)*bin_width ;
+        var y1 = this.settings.h - this.settings.h*this.settings.mb ;
+        var w = bin_width/(this.series.length+1) ;
+        c.fillRect(x1, y1, w, -this.settings.ph*theBins[i]/(1+this.settings.mh)) ;
+        c.strokeRect(x1, y1, w, -this.settings.ph*theBins[i]/(1+this.settings.mh)) ;
+      }
+      else{
+        // Data points with error bars.
+        var x2 = this.settings.w*this.settings.ml + (i+0.5)*bin_width ;
+        var y2 = this.settings.h - this.settings.h*this.settings.mb - this.settings.ph*theBins[i]/(1+this.settings.mh) ;
+        c.beginPath() ;
+        c.arc(x2,y2,5,0,2*pi,true) ;
+        c.closePath() ;
+        c.fill() ;
+        var err = 0.5*this.settings.ph*sqrt(theBins[i])/(1+this.settings.mh) ;
+        c.beginPath();
+        c.moveTo(x2,y2-err) ;
+        c.lineTo(x2,y2+err) ;
+        c.stroke() ;
+        c.closePath() ;
+      }
+    }
+    c.restore() ;
+  }
+  this.draw_legend = function(){
+    var c = this.context ;
+    c.save() ;
+    
+    // Now the legend
+    var lh = 0.3*this.settings.mt*this.settings.h ;
+    var lw = lh ;
+    
+    var y1 = 0.75*(this.settings.mt*this.settings.h-lh) ;
+    var y2 = y1 + 0.5*lh ;
+    
+    c.font = 0.5*lh+'px arial , sans-serif' ;
+    c.textAlign = 'left' ;
+    c.textBaseline = 'middle' ;
+    
+    for(var i=0 ; i<=this.series_counter ; i++){
+      var x1 = (0.05+0.3*i)*this.settings.w ;
+      c.fillStyle = this.series[i].fill ;
+      c.fillRect(x1, y1, lw, lh) ;
+      c.strokeStyle = 'rgb(0,0,0)' ;
+      c.strokeRect(x1, y1, lw, lh) ;
+      c.fillStyle = 'black' ;
+      var lines = this.series[i].name.split('|') ;
+      c.fillText(lines[0] , x1+1.25*lh, y2-0.25*lh) ;
+      c.fillText(lines[1], x1+1.25*lh, y2+0.25*lh) ;
+    }
+    
+    c.restore() ;
+  }
+  this.draw_title = function(){
+    var c = this.context ;
+    c.save() ;
+    
+    c.font = 0.25*this.settings.mt*this.settings.h+'px arial , sans-serif' ;
+    c.textAlign = 'center' ;
+    c.textBaseline = 'middle' ;
+    
+    c.fillStyle = 'black' ;
+    c.fillText(this.question, 0.5*this.settings.w, 0.25*this.settings.mt*this.settings.h) ;
+    
+    c.restore() ;
+  }
+  
+  this.draw_frame = function(theBins){
+    this.draw_background() ;
+    this.draw_border() ;
+    this.draw_axis_titles() ;
+    this.draw_xaxis_ticks(theBins) ;
+    this.draw_xaxis_labels(theBins) ;
+    this.draw_yaxis_ticks() ;
+    this.draw_legend() ;
+    this.draw_title() ;
+    this.draw_border() ;
+  }
+  
+  this.draw = function(){
+    var theBins = this.series[0].data_tmp ;
+    this.update_settings() ;
+    this.draw_frame(theBins) ;
+    for(var i=0 ; i<this.series_counter ; i++){
+      this.draw_data(this.series[i]) ;
+    }
+    if(this.series_counter>=0) this.draw_data(this.series[this.series_counter]) ;
+    this.draw_border() ;
+  }
+  
+  this.series_counter = -1 ;
+  this.bin_counter    =  0 ;
+  this.animate = function(){
+    // Basically add events one by one.
+    Get('button_next').style.display = 'none' ;
+    if(this.series_counter>=this.series.length) return ;
+    var result = this.series[this.series_counter].increment() ;
+    this.draw() ;
+    if(result==false){
+      if(this.series_counter<histogram.series.length-1){
+        Get('button_next').style.display = '' ;
+      }
+      return ;
+    }
+    window.setTimeout(animate_histogram, delay_animate_histogram) ;
+    return ;
+  }
+}
+function animate_histogram(){
+  histogram.animate() ;
+}
+
+
+function Get(id){ return document.getElementById(id) ; }
+function Create(type){ return document.createElement(type) ; }
+function sqrt(x){ return Math.sqrt(x) ; }
+
+</script>
+</head>
+
+<body onload="start()">
+<div id="div_wrapper">
+<canvas id="canvas_histogram" width="600" height="600"></canvas>
+<br />
+<button id="button_next">Next!</button>
+</div>
+
+<div id="div_hidden" style="display:none">
+  <img id="img_stripe_red"  src="stripe_red.png" />
+  <img id="img_stripe_blue" src="stripe_blue.png"/>
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+canvas#canvas_planes{
+  width  : 100% ;
+  border : 2px solid black ;
+  margin : auto ;
+}
+button#button_next{
+  width : 100% ;
+  font : 50pt arial , sans-serif ;
+}
+div#div_button_container{
+  width : 100% ;
+  text-align : center ;
+}
+
+table#table_scores{
+  width : 100% ;
+  border-collapse : collapse ;
+  margin-bottom : 10px ;
+}
+th#th_total, th#th_survive, th#th_success{
+  width : 50% ;
+  background : black ;
+  color : white ;
+  font : 20pt arial , sans-serif ;
+  text-align : right ;
+  padding : 0.1em ;
+  padding-right : 1em ;
+}
+th#th_total{
+  border-top-left-radius : 1em ;
+}
+th#th_success{
+  border-bottom-left-radius : 1em ;
+}
+td#td_total_value, td#td_survive_value, td#td_success_value{
+  width : 50% ;
+  background : white ;
+  color : black ;
+  font : 20pt arial , sans-serif ;
+  text-align : left ;
+  padding : 0.1em ;
+  padding-left : 1em ;
+}
+
+p#p_instructions{
+  text-align : center ;
+  font : 20pt arial , sans-serif ;
+}
+table#table_history{
+  width : 90% ;
+  margin : auto ;
+}
+tr.odd{
+  background : #eeeeee ;
+}
+tr.even{
+  background : #dddddd ;
+}
+thead#thead_history tr th{
+  background : black ;
+  color : white ;
+  font : 12pt arial , sans-serif ;
+  text-align : center ;
+  padding : 0.25em ;
+}
+tbody#tbody_history tr th, tbody#tbody_history tr td{
+  font : 12pt arial , sans-serif ;
+  text-align : center ;
+}

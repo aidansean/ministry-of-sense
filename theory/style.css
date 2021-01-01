@@ -1,0 +1,136 @@
+/* http://wallpoper.com/wallpaper/mathematics-chalkboards-310458 */
+body{
+  background : url('blackboard.jpg') ;
+}
+
+/* https://www.pinterest.com/pin/274508539762077325/ */
+div#div_header{
+  background : url('feynman.jpg') ;
+}
+
+h1{
+  text-align : center ;
+  font : 36pt bold arial , sans-serif ;
+  padding : 0px ;
+  padding-top : 18px ;
+  margin : 0px ;
+  
+  -webkit-text-stroke: 1px black;
+   color: white;
+   text-shadow:
+       3px 3px 0 #000,
+     -1px -1px 0 #000,  
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+       1px 1px 0 #000;
+}
+
+div#div_gameWrapper{
+  width : 750px ;
+  height : 1006px ;
+  overflow : hidden ;
+  border : 9px solid #001100 ;
+  margin : auto ;
+  margin-top : 20px ;
+  background : #ffffff ;
+}
+div#div_teamname{
+  font : 25pt bold arial , sans-serif ;
+  padding-top : 0.33em ;
+  background : #001100 ;
+  width : 150px ;
+  color : white ;
+  text-align : center ;
+  line-height : 1.2em ;
+}
+div#div_header{
+  width : 600px ;
+  border : 1px solid #001100 ;
+}
+
+/* Taken from http://css.maxdesign.com.au/listamatic/horizontal03.htm */
+#navcontainer{
+  clear : both ;
+  height : 46px ;
+  background-color: #000000 ;
+  width : 100% ;
+  border-top : 0px solid white ;
+}
+#navcontainer ul{
+  padding-left: 0 ;
+  margin : 0px ;
+  margin-left: 0 ;
+  background-color: #000000 ;
+  color: White ;
+  float: left ;
+  width: 100% ;
+  font-family: arial, helvetica, sans-serif ;
+  font-size : 22pt ;
+}
+#navcontainer ul li { display : inline ; }
+#navcontainer ul li a{
+  padding: 0.2em 1em ;
+  background-color: #000000 ;
+  color: White ;
+  text-decoration: none ;
+  float: left ;
+  border-right : 1px solid #ffffff ;
+}
+#navcontainer ul li a:hover{
+  background-color: #ffffff ;
+  color: #000000 ;
+}
+#currentNavButton{
+  background-color: #ffffff ;
+}
+div#div_table_wrapper{
+  vertical-align : top ;
+  text-align : center ;
+}
+
+table#table_scores{
+  width : 100% ;
+}
+th#th_ATLAS{
+  background : rgb(236,103, 29) ;
+}
+th#th_CMS{
+  background : rgb( 17,133,193) ;
+}
+
+th{
+  font : 24pt arial , sans-serif ;
+  text-align : center ;
+}
+th.left{
+  text-align : right ;
+  padding-right : 1em ;
+}
+th.right{
+  text-align : left ;
+  padding-left : 2em ;
+}
+th#th_ATLAS, th#th_CMS{
+  color : white ;
+  text-align : right ;
+  padding-right : 1em ;
+  width : 33% ;
+}
+td#td_score_ATLAS, td#td_score_CMS, td#td_multiplier_ATLAS, td#td_multiplier_CMS{
+  font : 24pt arial , sans-serif ;
+  width : 33% ;
+  padding-left : 2em ;
+  text-align : left ;
+}
+
+button#button_submit{
+  font : 20pt arial ;
+}
+
+div.center{
+  text-align : center ;
+}
+
+div.tab{ display : table ; }
+div.tab_row { display : table-row ; width : 100% ; }
+div.tab_cell{ display : table-cell ; vertical-align : top ; }

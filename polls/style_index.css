@@ -1,0 +1,62 @@
+body{
+  background : #dddddd ;
+  background-position : cover ;
+  background-image : url(chariots.jpg) ;
+}
+h1{
+  font : 36pt arial , sans-serif ;
+  text-align : center ;
+}
+button.response{
+  width : 100% ;
+  font : 30pt arial ;
+  text-align : left ;
+  margin-top : 5px ;
+  margin-bottom : 5px ;
+  padding : 0.5em ;
+}
+button.chosen{
+  background : yellow ;
+  border : 2px solid gold ;
+  color : #000000 ;
+}
+button.inactive{
+  color : #cccccc ;
+}
+td.response{
+  width : 500px ;
+}
+td.spacer{
+  height : 20px ;
+}
+p#p_question{
+  text-align : center ;
+  font : 24pt arial ;
+  margin : 20px 20px ;
+  background : white ;
+  width : 494px ;
+  margin : auto ;
+  margin-bottom : 20px ;
+  padding : 0.25em ;
+  border-radius : 1em ;
+}
+table{
+  width : 500px ;
+  margin : auto ;
+}
+span.response_text{
+  display : inline-block ;
+  width : 200px ;
+}
+span.response_stars{
+  width : 10em ;
+}
+span.response_checkmark_no, span.response_checkmark_yes{
+  width : 10em ;
+}
+span.response_checkmark_no{
+  color : red ;
+}
+span.response_checkmark_yes{
+  color : green ;
+}

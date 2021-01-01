@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd" >
+<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='en' xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>Trigger that Higgs!</title> 
+<link type="text/css" rel="stylesheet" media="all" href="style.css" />
+<script type="text/javascript" src="js/scores.php"></script>
+</head>
+<body onload="start()">
+<div id="div_gameWrapper" class="gameWrapper">
+
+<div class="tab">
+  <div id="div_teamname" class="tab_cell">Team CERN</div>
+  <div id="div_header"   class="tab_cell"></div>
+</div>
+
+<div id="navcontainer" class="tab">
+  <ul id="navlist">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="play.html">Play</a></li>
+    <li><a href="scores.html">Scores</a></li>
+    <li><a href="spy.html">Spy mode</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+</div>
+
+<div id="div_playSpace">
+  <p class="blurb">Here is where we immortalise the highest scoring players of all time.  To change the scoreboard click on one of the buttons:</p>
+  <div id="div_button_wrapper">
+    <button id="button_suddenDeath" class="scores">One chance mode</button>
+    <button id="button_pro"         class="scores">Pro mode</button>
+  </div>
+  
+  <div id="div_scoreboard">
+  </div>
+</div>
+
+<div id="div_footer" class="tab">
+</div>
+
+</div>
+
+<div id="div_hidden">
+  <table id="table_scores_suddenDeath">
+    <thead>
+      <tr>
+        <th class="highscores">Rank</th>
+        <th class="highscores">Score</th>
+        <th class="highscores">Name</th>
+      </tr>
+    </thead>
+    <tbody id="tbody_scores_suddenDeath">
+    </tbody>
+  </table>
+  
+  <table id="table_scores_pro">
+    <thead>
+      <tr>
+        <th class="highscores">Rank</th>
+        <th class="highscores">Score</th>
+        <th class="highscores">Name</th>
+      </tr>
+    </thead>
+    <tbody id="tbody_scores_pro">
+    </tbody>
+  </table>
+</div>
+
+<div id="div_hidden">
+  <img id="img_header" src="images/header.jpg"/>
+  <img id="img_footer" src="images/footer.jpg"/>
+  <h2 class="scores" id="h2_suddenDeath">One chance scores</h2>
+  <h2 class="scores" id="h2_pro">Pro scores</h2>
+</div>
+
+</body>
+</html>

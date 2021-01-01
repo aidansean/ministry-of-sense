@@ -1,0 +1,34 @@
+body{
+  background-image : url(chariots.jpg) ;
+}
+table{
+  border-collapse : collapse ;
+  margin : auto ;
+}
+input.text_long, input.text_short{
+  font : 14pt arial , sans-serif ;
+}
+input.text_long{
+  width : 20em ;
+}
+input.text_short{
+  width : 3em ;
+}
+tbody#tbody_question tr{
+  background : #eeeeee ;
+}
+tbody#tbody_responses tr{
+  background : #dddddd ;
+}
+h1{
+  text-align : center ;
+  font : 36pt arial , sans-serif ;
+}
+button.button_big{
+  width : 300px ;
+  font : 16pt arial , sans-serif ;
+}
+select.question{
+  width : 300px ;
+  font : 16pt arial , sans-serif ;
+}
