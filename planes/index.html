@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd" >
+<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='en' xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>Battle of Britain</title> 
+<link type="text/css" rel="stylesheet" media="all" href="style.css" />
+<link type="text/css" rel="stylesheet" media="all" href="style_trigger.css" />
+<script type="text/javascript" src="helper.js"></script>
+<script type="text/javascript" src="settings.js"></script>
+<script type="text/javascript" src="header_footer.js"></script>
+<script type="text/javascript" src="functions.js"></script>
+</head>
+<body onload="start()">
+
+<div id="div_gameWrapper">
+
+<div class="tab">
+  <div id="div_teamname" class="tab_cell">Team CERN</div>
+  <div id="div_header"   class="tab_cell"></div>
+</div>
+  <div id="navcontainer" class="tab">
+      <ul id="navlist">
+      <li><a href="index.html">Play</a></li>
+      <li><a id="a_mute">Unmute</a></li>
+      <!--<li><a href="about.html">About</a></li>-->
+    </ul>
+  </div>
+
+<div id="div_playSpace">
+  <div class="center">
+    <canvas id="canvas_planes" width="1500" height="1500"></canvas>
+  </div>
+  
+</div>
+
+<div id="div_footer" class="tab">
+</div>
+
+<div id="div_hidden">
+  <img id="img_header" src="images/header.jpg"/>
+  <img id="img_footer" src="images/footer.jpg"/>
+</div>
+
+<div style="display:none">
+  <img id="img_Channel"    src="images/england.jpg" />
+  <img id="img_spitfires"  src="images/spitfire.jpg" />
+  <img id="img_hurricane"  src="images/hawker_hurricane.gif" />
+  <img id="img_camouflage" src="images/camouflage.png" />
+  
+  <audio id="audio_SMG">
+    <source src="sounds/SMG.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="audio_breakdown">
+    <source src="sounds/breakdown.mp3" type="audio/mpeg">
+    <embed height="50" width="100" src="sounds/breakdown.mp3">
+  </audio>
+  <audio id="audio_boo">
+    <source src="sounds/boo.mp3" type="audio/mpeg">
+    <embed height="50" width="100" src="sounds/boo.mp3">
+  </audio>
+  <audio id="audio_cheer">
+    <source src="sounds/cheer.mp3" type="audio/mpeg">
+    <embed height="50" width="100" src="sounds/cheer.mp3">
+  </audio>
+  <audio id="audio_chocksAway">
+    <source src="sounds/chocksAway_aidan.mp3" type="audio/mpeg">
+    <embed height="50" width="100" src="sounds/chocksAway_aidan.mp3">
+  </audio>
+  <audio id="audio_offTheyGo">
+    <source src="sounds/offTheyGo_aidan.mp3" type="audio/mpeg">
+    <embed height="50" width="100" src="sounds/offTheyGo_aidan.mp3">
+  </audio>
+  <audio id="audio_comeBackSafe">
+    <source src="sounds/comeBackSafe_aidan.mp3" type="audio/mpeg">
+    <embed height="50" width="100" src="sounds/comeBackSafe_aidan.mp3">
+  </audio>
+</div>
+
+</div>
+
+</body>
+</html>

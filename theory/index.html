@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd" >
+<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='en' xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>Find the decays</title> 
+<link type="text/css" rel="stylesheet" media="all" href="style.css" />
+<script type="text/javascript" src="helper.js"></script>
+<script type="text/javascript" src="functions.js"></script>
+</head>
+<body onload="start()">
+<!--
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1585457358388475',
+      xfbml      : true,
+      version    : 'v2.3'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+-->
+
+<div id="div_gameWrapper">
+
+  <div class="tab">
+    <div id="div_teamname" class="tab_cell">Team CERN</div>
+    <div id="div_header"   class="tab_cell"><h1>Theory game</h1></div>
+  </div>
+  
+  <!--
+  <div id="navcontainer" class="tab">
+    <ul id="navlist">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </div>
+  -->
+  
+  <table id="table_scores">
+    <thead><tr><th class="left">Team</th><th class="right">Score</th><th class="right">Multiplier</th></tr></thaad>
+    <tbody>
+      <tr><th id="th_ATLAS">ATLAS</th><td id="td_score_ATLAS"></td><td id="td_multiplier_ATLAS"></td></tr>
+      <tr><th id="th_CMS"  >CMS</th><td id="td_score_CMS"></td><td id="td_multiplier_CMS"></td></tr>
+    </tbody>
+  </table>
+  <div class="center">
+    <button id="button_submit">We're done, submit the results!</button>
+  </div>
+  
+  <div class="blurb">
+    <div class="center">
+    
+    </div>
+    <div class="center">
+      <canvas id="canvas_grid" width="750" height="750"></canvas>
+    </div>
+  </div>
+  
+  <div id="div_footer" class="tab">
+  </div>
+
+</div>
+
+<pre id="pre_debug"></pre>
+
+</body>
+</html>

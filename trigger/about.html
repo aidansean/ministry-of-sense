@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd" >
+<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='en' xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>Trigger that Higgs!</title> 
+<link type="text/css" rel="stylesheet" media="all" href="style.css" />
+<script type="text/javascript" src="js/about.php"></script>
+</head>
+<body onload="start()">
+<div id="div_gameWrapper" class="gameWrapper">
+
+<div class="tab">
+  <div id="div_teamname" class="tab_cell">Team CERN</div>
+  <div id="div_header"   class="tab_cell"></div>
+</div>
+
+<div id="navcontainer" class="tab">
+  <ul id="navlist">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="play.html">Play</a></li>
+    <li><a href="scores.html">Scores</a></li>
+    <li><a href="spy.html">Spy mode</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+</div>
+
+<div id="div_playSpace">
+
+  <h2>Feedback form</h2>
+  <p class="blurb">If you have feedback about the game, we'd love to hear from you!  Did you find a bug?  Do you have a suggestion about how to improve the game?  Do you have any questions about the game?  If so, please fill in the form below:</p>
+    <table>
+      <tbody>
+        <tr>
+          <td class="message_left" >Name: </td>
+          <td class="message_right"><input type="text" id="input_message_name" value=""/></td>
+        </tr>
+        <tr>
+          <td class="message_left" >email address: </td>
+          <td class="message_right"><input type="text" id="input_message_email" value=""/></td>
+        </tr>
+        <tr>
+          <td class="message_left" >Message: </td>
+          <td class="message_right"><textarea id="textarea_message" rows="6" cols="40"></textarea></td>
+        </tr>
+        <tr>
+          <td class="message_left" ></td>
+          <td class="message_right"><button class="button_about" id="button_send">Send message</button><button class="button_about" id="button_clear">Clear form</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <p><span id="span_message_response"></span></p>
+
+<h2>Thanks and small print</h2>
+  <p class="blurb">The work to date has been made possible thanks to the generosity of the Ogden Trust.  The game is developed by Aidan Randle-Conde and Khuram Rashid, with support from Sam Gregson and Ben Still. We are grateful to the Grammar School at Leeds for their support and feedback.  We are grateful to CERN and soundbible for use of the CMS detector image, and the sounds, respectively.  Although we use the words "CERN", "ATLAS", and "CMS", we are not associated with them in any way, these are merely placeholder names.</p>
+
+</div>
+
+<div id="div_footer" class="tab">
+</div>
+
+<div id="div_hidden">
+  <img id="img_header" src="images/header.jpg"/>
+  <img id="img_footer" src="images/footer.jpg"/>
+</div>
+
+</div>
+
+</body>
+</html>

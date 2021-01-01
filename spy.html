@@ -1,0 +1,51 @@
+
+<html>
+<head>
+<title>Spy box</title>
+<script type="text/ecmascript">
+
+var conn = null ;
+function start(){
+  conn = new WebSocket('ws://www.ministryofsense.com:8080');
+  conn.onopen = function(e){
+    console.log("Connection established!") ;
+    conn.send('type:spy') ;
+  } ;
+
+  conn.onmessage = function(e){
+    Get('div_spy').innerHTML = e.data + '<br />' + Get('div_spy').innerHTML ;
+  } ;
+}
+function Get(id){ return document.getElementById(id) ; }
+
+</script>
+<style type="text/css">
+body{
+  background : #dddddd ;
+}
+h1{
+  font : 36pt arial , sans-serif ;
+  text-align : center ;
+}
+div#div_spy{
+  width : 600px ;
+  margin : auto ;
+  font : 12pt courier , monospace ;
+  padding : 20px ;
+  background : white ;
+  border : 1px solid black ;
+}
+</style>
+</head>
+<body onload="start()">
+
+<h1>Spy box</h1>
+
+<div id="div_spy"></div>
+
+</body>
+</html>
+
+
+
+

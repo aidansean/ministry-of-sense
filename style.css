@@ -1,0 +1,93 @@
+body{
+  background : #333333 ;
+  background-image : url('images/CMS.jpg') ;
+  background-position : center ;
+}
+h1{
+  font : 36pt times , serif ;
+  text-align : center ;
+  text-transform: uppercase ;
+  color : rgb(53,180,255) ;
+}
+p#p_tagline{
+  font : 30pt times , serif ;
+  padding : 20px ;
+  color : rgb(200,82,14) ;
+}
+div#div_wrapper{
+  height : 100% ;
+  width : 100% ;
+  vertical-align : middle ;
+}
+div#div_text{
+  width : 60% ;
+  min-height : 40% ;
+  text-align : center ;
+  margin : auto ;
+  vertical-align : middle ;
+  background : rgba(0,0,0,0.85) ;
+  position : absolute ;
+  top : 10% ;
+  left : 20% ;
+  padding : 20px ;
+  border-radius : 10px ;
+}
+p#p_source{
+  text-align : right ;
+  font : 12pt times , serif ;
+}
+p#p_source a{
+  color : white ;
+  text-decoration : none ;
+}
+p#p_source a:hover{
+  text-decoration : underline ;
+}
+h2{
+  font : 40pt times , serif ;
+  padding : 0px ;
+  color : rgb(200,82,14) ;
+  width : 600px ;
+  height : 120px ;
+  margin : auto ;
+  line-height : 90pt ;
+  margin-bottom : 1em ;
+  -webkit-text-stroke: 1px black;
+   color: white;
+   text-shadow:
+       3px 3px 0 #000,
+     -1px -1px 0 #000,  
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+       1px 1px 0 #000;
+  border : 2px solid white ;
+}
+h2 a{
+  color : white ;
+  text-decoration : none ;
+}
+h2 a:hover{ text-decoration : underline ; }
+
+h2#h2_spitfire{ background : url('/show/images/spitfire.jpg') ; }
+h2#h2_theory  { background : url('/show/images/theory.jpg'  ) ; }
+h2#h2_trigger { background : url('/show/images/trigger.jpg' ) ; }
+h2#h2_question{ background : url('/show/images/question.jpg') ; } /* http://www.shutterstock.com/video/clip-3125215-stock-footage-dark-blue-question-mark-looping-animated-background.html */
+
+p, ul{
+  font : 20pt times , serif ;
+  padding : 20px ;
+  color : rgb(200,82,14) ;
+}
+
+ul{
+  text-align : left ;
+}
+ul a, ul a:visited{
+  color : white ;
+}
+h3{
+  font : 30pt times , serif ;
+  color : rgb(53,180,255) ;
+}
+
+

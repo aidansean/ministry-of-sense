@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd" >
+<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='en' xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>Trigger that Higgs!</title> 
+<link type="text/css" rel="stylesheet" media="all" href="style.css" />
+<script type="text/javascript" src="js/spy.php"></script>
+</head>
+<body onload="start()">
+
+<div id="div_gameWrapper" class="gameWrapper_spy">
+
+  <div class="tab" style="display:none">
+    <div id="div_teamname" class="tab_cell">Team CERN</div>
+    <div id="div_header"   class="tab_cell"></div>
+  </div>
+
+  <div id="div_playSpace">
+    <div class="tab" id="div_spy_tab">
+      <div class="tab_row">
+        <div id="div_spy_ATLAS" class="tab_cell spy_tab_cell">
+          <h2 id="h2_team_ATLAS">Team ATLAS</h2>
+          <canvas id="canvas_collision_ATLAS" width="500px" height="500px"></canvas>
+          <canvas id="canvas_histogram_ATLAS" width="500px" height="500px"></canvas>
+          <p id="p_ATLAS_nSavedCollisions"><span id="span_ATLAS_nSavedCollisions">0</span> collision(s) saved!</p>
+          <button class="spy_experiment" id="button_analyse_ATLAS_show" >Show data</button>
+          <button class="spy_experiment" id="button_analyse_ATLAS_bkg"  >Analyse background!</button>
+          <button class="spy_experiment" id="button_analyse_ATLAS_ghost">Find peak?</button>
+          <button class="spy_experiment" id="button_analyse_ATLAS_peak" >Find largest deviation!</button>
+          <button class="spy_experiment" id="button_analyse_ATLAS_signal">Measure signal!</button>
+        </div>
+        <div id="div_spy_CMS"   class="tab_cell spy_tab_cell">
+          <h2 id="h2_team_CMS">Team CMS</h2>
+          <canvas id="canvas_collision_CMS"   width="500px" height="500px"></canvas>
+          <canvas id="canvas_histogram_CMS"   width="500px" height="500px"></canvas>
+          <p id="p_CMS_nSavedCollisions"><span id="span_CMS_nSavedCollisions">0</span> collision(s) saved!</p>
+          <button class="spy_experiment" id="button_analyse_CMS_show"  >Show data</button>
+          <button class="spy_experiment" id="button_analyse_CMS_bkg"   >Analyse background!</button>
+          <button class="spy_experiment" id="button_analyse_CMS_ghost" >Find peak?</button>
+          <button class="spy_experiment" id="button_analyse_CMS_peak"  >Find largest deviation!</button>
+          <button class="spy_experiment" id="button_analyse_CMS_signal">Measure signal!</button>
+        </div>
+      </div>
+    </div>
+    <div class="center">
+      <table id="table_combo">
+        <tbody id="tbody_nSigma">
+          <tr>
+            <th id="th_ATLAS_nSigma">ATLAS:</th>
+            <th id="th_ATLAS_nSigma_value"><span id="span_ATLAS_nSigma"></span></th>
+          </tr>
+          <tr>
+            <th id="th_CMS_nSigma">CMS:</th>
+            <th id="th_CMS_nSigma_value"><span id="span_CMS_nSigma"></span></th>
+          </tr>
+          <tr>
+            <th id="th_prob_5Sigma">5 sigma:</th>
+            <th id="th_prob_5Sigma_value"><span id="span_prob_5Sigma"></span></th>
+          </tr>
+          <tr id="tr_combined_nSigma">
+            <th id="th_combined_nSigma">Combined:</th>
+            <th id="th_combined_nSigma_value"><span id="span_combined_nSigma"></span></th>
+          </tr>
+        </tbody>
+        <tbody id="tbody_combo">
+        </tbody>
+      </table>
+      <canvas id="canvas_histogram_pointless" width="1000px" height="500px"></canvas>
+      <button class="spy_joint" id="button_dataTaking">Start data taking</button>
+      <button class="spy_joint" id="button_freeze">Freeze results!</button>
+      <button class="spy_joint" id="button_continue_postFreeze">Continue</button>
+      
+      <button class="spy_joint" id="button_analyse_both_ghost">Find peak?</button>
+      <button class="spy_joint" id="button_analyse_both_bkg"  >Measure background</button>
+      <button class="spy_joint" id="button_analyse_both_peak" >Find largest deviation</button>
+      
+      <button class="spy_joint" id="button_continue_postShow"  >Continue</button>
+      <button class="spy_joint" id="button_continue_postGhost" >Continue</button>
+      <button class="spy_joint" id="button_continue_postBkg"   >Continue</button>
+      <button class="spy_joint" id="button_continue_postPeak"  >Continue</button>
+      <button class="spy_joint" id="button_continue_postSignal">Continue</button>
+      
+      <button class="spy_joint" id="button_pointless_noFinishLine">Combined results ready</button>
+      <button class="spy_joint" id="button_pointless_finishLine"  >Show finish line</button>
+      <button class="spy_joint" id="button_pointless_run"         >Statistical analysis!</button>
+      
+      <button class="spy_joint" id="button_combine">Combine results!</button>
+      <button class="spy_joint" id="button_announce">Continue!</button>
+    </div>
+  </div>
+  
+  <div id="div_footer" class="tab"  style="display:none">
+  </div>
+</div>
+
+<div id="div_hidden">
+  <img id="img_header" src="images/header.jpg"/>
+  <img id="img_footer" src="images/footer.jpg"/>
+  <img id="img_CMSPhoto" src="images/CMSPhoto.jpg" />
+  <img id="img_detectorBase" src="images/detectorBase.png" />
+  
+  <canvas id="canvas_eventDisplay_hidden" width="750px" height="750px"></canvas>
+  <canvas id="canvas_eventDisplay_hidden_activity" width="750px" height="750px"></canvas>
+  <canvas id="canvas_histogram_ATLAS_hidden" width="750px" height="750px"></canvas>
+  <canvas id="canvas_histogram_CMS_hidden"   width="750px" height="750px"></canvas>
+  <audio autostart="0" id="audio_tada">
+    <source src="sounds/Tada.mp3" type="audio/mpeg" />
+    <embed height="50" width="100" src="sounds/Tada.mp3" />
+  </audio>
+  <audio autostart="0" id="audio_pointless">
+    <source src="sounds/pointless_cropped.mp3" type="audio/mpeg" />
+    <embed height="50" width="100" src="sounds/pointless_cropped.mp3" />
+  </audio>
+</div>
+
+</body>
+</html>
